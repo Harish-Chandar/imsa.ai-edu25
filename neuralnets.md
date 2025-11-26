@@ -1,4 +1,5 @@
-# Neural Networks - Lecture Notes
+# General Neural Networks
+`Lecture Notes from December 03, 2025`   
 
 ## Key Pieces of Vobabularly
 * **Vector**: An ordered list of numbers, can represent basically anything
@@ -115,4 +116,27 @@ Let:
 - Uses estimates of previous moments of gradients to improve convergence (the way it reaches the minimum error point)
 - Momentum (like the momentum of a ball rolling down a hill) helps smooth out updates by not reacting too strongly to recent changes
 - Generally performs better than standard gradient descent
+
+## Common Problems
+* **Overfitting**: Model learns training data too well, performs poorly on new data
+    - Regularization, Dropout, Early Stopping
+* **Underfitting**: Model is too simple to capture underlying patterns
+    - Increase model complexity, add more features (inputs)
+* **Vanishing/Exploding Gradients**: Gradients become too small or too large during backpropagation
+    - ReLU is good at fighting vanishing gradients (known, constant gradient)
+    - Normalization techniques (BatchNorm, LayerNorm) and preprocessing inputs
+* **Computational Cost**: Training deep networks can be resource-intensive
+    - Use GPUs with Tensors, distributed training, efficient architectures (e.g., CNNs for images)
+
+## New Topics
+* Convolutional Neural Networks (CNNs)
+* Recurrent Neural Networks (RNNs)
+* Long Short-Term Memory (LSTM) Networks
+
+### Over break
+* Review basic Python syntax for defining classes and functions
+* Email/Messenger me any questions!
+
+### Much Later...
+* Transformers and Attention Mechanisms
 
