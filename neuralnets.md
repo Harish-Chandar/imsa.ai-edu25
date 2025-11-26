@@ -42,19 +42,22 @@ Input Layer      Hidden Layer(s)      Output Layer
 
 ## Feedforward Process
 1. Input data is fed into the input layer - one quantity per node
-2. Data "flows" through the network layer by layer, edge by edge
-3. Each node computes a weighted sum of its inputs, applies the activation function, and passes the result to the next layer
-For a node \( j \) in layer \( l \):
+2. Data "flows" through the network layer by layer, edge by edge   
 
-\[
-z_j^{(l)} = \sum_{i} w_{ij}^{(l-1)} a_i^{(l-1)} + b_j^{(l)}
-\]
-\[
+Each node computes a weighted sum of its inputs, applies the activation function, 
+and passes the result to the next layer. For a node $j$ in layer $l$:
+
+$$
+z_j^{(l)} = \sum_i w_{ij}^{(l-1)} a_i^{(l-1)} + b_j^{(l)}
+$$
+
+$$
 a_j^{(l)} = f(z_j^{(l)})
-\]
+$$
 
-where:
-- \( w_{ij}^{(l-1)} \) is the weight from node \( i \) in layer \( l-1 \) to node \( j \) in layer \( l \)
-- \( a_i^{(l-1)} \) is the activation of node \( i \) in layer \( l-1 \)
-- \( b_j^{(l)} \) is the bias term for node \( j \) in layer \( l \)
-- \( f \) is the activation function
+Let:
+
+- $w_{ij}^{(l-1)}$ is the weight from node $i$ in layer $l-1$ to node $j$ in layer $l$
+- $a_i^{(l-1)}$ is the activation of node $i$ in layer $l-1$
+- $b_j^{(l)}$ is the bias term for node $j$ in layer $l$
+- $f$ is the activation function
