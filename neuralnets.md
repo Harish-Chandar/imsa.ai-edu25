@@ -11,9 +11,10 @@
 * **Graph**: A collection of **nodes** connected by **edges**
     - Can represent neural networks
 * **Derivative**: A measure of how a function changes as its input changes
-    - In single-variable calculus, it's the slope of the tangent line at a point
-        - Denoted as $\frac{dy}{dx}$ or $f'(x)$
-    - In multivariable calculus, we have **partial derivatives** that measure change with respect to one variable while holding others constant
+    - In single-variable calculus, it's the slope of the tangent line at a point, instantaneous rate of change
+        - If $y = f(x)$, derivative is $\frac{dy}{dx}$ or $f'(x)$
+    - In multivariable calculus, we have **partial derivatives** that measure change with respect to one variable 
+        - So if $f = g(x_1, x_2, x_3)$, the partial derivative of $x_1$ is $\frac{\partial f}{\partial x_1} = g(x_1 + \Delta x_1, x_2, x_3) - g(x_1, x_2, x_3)$
 * **Gradient**: A **vector** of **partial derivatives**, tells us how a function changes in every direction as we change its inputs
     - Used heavily in optimization 
 * **Convergence**: The process of approaching a specific value or solution over time
