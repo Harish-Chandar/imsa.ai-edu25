@@ -37,9 +37,10 @@ Input Layer      Hidden Layer(s)      Output Layer
 * Place for edges to connect
 * Each node applies a mathematical **activation function** to its inputs
 * Common functions:
-  - Sigmoid (logistic function)
-  - Tanh (hyperbolic tangent)
-  - ReLU (Rectified Linear Unit)
+  - Sigmoid: $\frac{1}{1 + e^{-x}}$ (squashes input to range 0 to 1, good for probabilities)
+  - Tanh: $tanh(x)$ (hyperbolic tangent, sigmoid-esque but ranges from -1 to 1, and very steep around 0)
+  - Softmax (sigmoid-esque but multivariate, harder to plot, multi-class classification)
+  - ReLU: $max(0, x)$ (Rectified Linear Unit)
 
 ### Edges
 * Each edge has an associated **weight** that determines the strength of the connection
@@ -99,10 +100,19 @@ Let:
 
 3. The output layer produces the final predictions
 
+## Loss functions
+* Measure the difference between predicted outputs and actual targets - it's the thing we're optimizing
+* Common loss functions:
+    - Mean Squared Error (measure of deviation) for regression tasks
+    - Cross-Entropy Loss (meaaure of confusion) for classification tasks
+    - Custom loss functions for specific problems (e.g., Hinge Loss for SVMs, Displacement Error for robotics, -Accuracy for image recognition, etc)
+
 ## Backpropagation (Training)
 1. Compute the error at the output layer using a loss function (e.g., Mean Squared, Cross-Entropy, etc)
 2. Propagate the error backward through the network to compute gradients
-    - Calculate each loss gradient with respect to each weight using the Calculus chain rule (derivative of activation function)
+    - Calculate each loss gradient with respect to each weight using the Calculus chain rule (using derivatives of activation functions)
+        - Chain Rule allows us to compute derivatives of composite functions
+        - e.g., if $z = f(g(x))$, then $\frac{dz}{dx} = \frac{dz}{dg} \cdot \frac{dg}{dx}$
     - Partial derivatives (Multivariable Calculus) tell us how to adjust each weight to reduce error in gradient descent
 3. Update weights using an optimization algorithm (e.g., Stochastic Gradient Descent, Adam, etc)
     - New weight = Old weight - Learning Rate * Gradient
@@ -123,6 +133,9 @@ Let:
 * **Underfitting**: Model is too simple to capture underlying patterns
     - Increase model complexity, add more features (inputs)
 * **Vanishing/Exploding Gradients**: Gradients become too small or too large during backpropagation
+    - Switch hyperbolic tangent (tanh) for sigmoid or vice versa
+        - $d/dx$ of sigmoid is small for large $|x|$, leading to vanishing gradients
+        - $d/dx$ of tanh is larger (actually $\frac{d}{dx} tanh(x) = sech^2(x)$), gradient is about 4x larger than sigmoid
     - ReLU is good at fighting vanishing gradients (known, constant gradient)
     - Normalization techniques (BatchNorm, LayerNorm) and preprocessing inputs
 * **Computational Cost**: Training deep networks can be resource-intensive
