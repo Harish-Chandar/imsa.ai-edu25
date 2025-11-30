@@ -1,18 +1,24 @@
 # General Neural Networks
 `Lecture Notes from December 03, 2025`   
 
-## Key Pieces of Vobabularly
-* **Vector**: An ordered list of numbers, can represent basically anything
-* **Matrix**: A 2D array of numbers
-    - A complex vector type
-    - Linear Algebra tells us that every transformation we do to vectors can be represented as a matrix multiplication
-* **Graph**: A collection of **nodes** connected by **edges**
-    - Can represent neural networks
-
-## Philosophy of Neural networks
 * Inspired by brains (supposedly)
 * Supposed to "learn" patterns in data
 * Composed of layers of interconnected nodes
+
+## Key Pieces of Vobabularly
+* **Vector**: An ordered list or "collection" of numbers, can represent basically anything
+    - Useful for representing mutli-dimensional data points
+* **Graph**: A collection of **nodes** connected by **edges**
+    - Can represent neural networks
+* **Derivative**: A measure of how a function changes as its input changes
+    - In single-variable calculus, it's the slope of the tangent line at a point
+        - Denoted as $\frac{dy}{dx}$ or $f'(x)$
+    - In multivariable calculus, we have **partial derivatives** that measure change with respect to one variable while holding others constant
+* **Gradient**: A **vector** of **partial derivatives**, tells us how a function changes in every direction as we change its inputs
+    - Used heavily in optimization 
+* **Convergence**: The process of approaching a specific value or solution over time
+    - In neural networks, we want our training process to converge to a set of weights that minimize the loss function
+    - **Divergence** is the opposite, where values move away from a target -- this is bad!
 
 ## General Structure
 * Layers of **nodes**
@@ -108,11 +114,13 @@ Let:
     - Custom loss functions for specific problems (e.g., Hinge Loss for SVMs, Displacement Error for robotics, -Accuracy for image recognition, etc)
 
 ## Backpropagation (Training)
-1. Compute the error at the output layer using a loss function (e.g., Mean Squared, Cross-Entropy, etc)
+1. Compute the error at the output layer using a loss function 
 2. Propagate the error backward through the network to compute gradients
     - Calculate each loss gradient with respect to each weight using the Calculus chain rule (using derivatives of activation functions)
+        - Each neural network layer applies a function to the outputs of the previous layer - calling one function inside another is a composite function
         - Chain Rule allows us to compute derivatives of composite functions
-        - e.g., if $z = f(g(x))$, then $\frac{dz}{dx} = \frac{dz}{dg} \cdot \frac{dg}{dx}$
+        - e.g., if $y = f(u)$ and $u = g(x)$, then $\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$
+        - In another form: if $h = f(g(x))$, then $\frac{dh}{dx} = f'(g(x)) \cdot g'(x)$
     - Partial derivatives (Multivariable Calculus) tell us how to adjust each weight to reduce error in gradient descent
 3. Update weights using an optimization algorithm (e.g., Stochastic Gradient Descent, Adam, etc)
     - New weight = Old weight - Learning Rate * Gradient
@@ -125,26 +133,43 @@ Let:
 - Advanced optimization algorithm that adapts learning rates for each weight individually
 - Uses estimates of previous moments of gradients to improve convergence (the way it reaches the minimum error point)
 - Momentum (like the momentum of a ball rolling down a hill) helps smooth out updates by not reacting too strongly to recent changes
-- Generally performs better than standard gradient descent
+- Gradient descent but better
+
+#### Hyperparameters - tuning knobs for training
+* Learning Rate: Controls how much to change the weights during each update
+* Batch Size: Number of training examples used in one forward/backward pass
+* Number of Epochs: Number of times the entire training dataset is passed through the network
 
 ## Common Problems
 * **Overfitting**: Model learns training data too well, performs poorly on new data
-    - Regularization, Dropout, Early Stopping
+    - Model regularization (L1, L2, BatchNorm), Dropout Layers, Early Stopping (naive but effective)
 * **Underfitting**: Model is too simple to capture underlying patterns
     - Increase model complexity, add more features (inputs)
-* **Vanishing/Exploding Gradients**: Gradients become too small or too large during backpropagation
+* **Vanishing/Exploding Gradients**: Gradients become too small or too large during backpropagation, either causing divergence or very slow learning
     - Switch hyperbolic tangent (tanh) for sigmoid or vice versa
         - $d/dx$ of sigmoid is small for large $|x|$, leading to vanishing gradients
         - $d/dx$ of tanh is larger (actually $\frac{d}{dx} tanh(x) = sech^2(x)$), gradient is about 4x larger than sigmoid
     - ReLU is good at fighting vanishing gradients (known, constant gradient)
     - Normalization techniques (BatchNorm, LayerNorm) and preprocessing inputs
+* **Dying ReLUs**: Neurons output zero for all inputs, effectively "dying"
+    - Unfortunately ReLU isn't the solution to everything, it can cause "dead" nodes
+    - Use Leaky ReLU or Parametric ReLU (PReLU) to allow small gradients when inputs are negative
 * **Computational Cost**: Training deep networks can be resource-intensive
     - Use GPUs with Tensors, distributed training, efficient architectures (e.g., CNNs for images)
 
 ## New Topics
 * Convolutional Neural Networks (CNNs)
+    - Good for image data
+    - Use convolutional layers (image transformations) to detect local patterns
+    - Pooling layers to reduce dimensionality
 * Recurrent Neural Networks (RNNs)
-* Long Short-Term Memory (LSTM) Networks
+    - Good for sequential data (time series, text)
+    - Maintain hidden states
+    - Autoregressive -- predict next item based on previous items
+* Long Short-Term Memory (LSTM) networks
+    - Even better for sequential data (time series, text)
+    - Gated mechanisms to remember long-term dependencies in addition to general autoregressive behavior
+    - Variant of the RNN architecture to fight vanishing gradients
 
 ### Over break
 * Review basic Python syntax for defining classes and functions
@@ -152,4 +177,5 @@ Let:
 
 ### Much Later...
 * Transformers and Attention Mechanisms
-
+    - Absolute state-of-the-art for many tasks
+    - Vaswani et al., "Attention is All You Need" (2017). Google Brain + Google Research
