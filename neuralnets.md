@@ -173,8 +173,9 @@ Let:
     - Variant of the RNN architecture to fight vanishing gradients
 
 ### Over break
-* Review basic Python syntax for defining classes and functions
-* Email/Messenger me any questions!
+* Review basic **Python syntax** for defining classes and functions
+* **Email/Messenger** me any questions!
+* **PyTorch:** https://docs.pytorch.org/examples/
 
 ### Much Later...
 * Transformers and Attention Mechanisms
