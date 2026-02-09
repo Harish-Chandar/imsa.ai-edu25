@@ -87,3 +87,33 @@ drop = nn.Dropout(0.2)  # drop 20% of neurons
 ```python
 bn = nn.BatchNorm1d(64)  # normalize 64 features
 ```
+
+Ahhh, got it this time — you just want **LayerNorm on its own**, no Linear involved. Here’s a clean Markdown page just for **Layer Normalization**:
+
+---
+
+# Layer Normalization (`nn.LayerNorm`)
+
+**Input:** number of features in the layer (1D for simple layers, 2D/3D for sequences/images)
+
+---
+
+**Why you would use it:**
+
+* Keeps the outputs of a layer balanced so training is more stable.
+* Works well for sequences or very small batches where BatchNorm struggles.
+* Can improve training speed and model performance.
+
+**Why you might not use it:**
+
+* Adds extra computation compared to not normalizing.
+* Might not be necessary for very simple or small networks.
+* For large image batches, BatchNorm may still give better results.
+
+---
+
+**Example:**
+
+```python
+ln = nn.LayerNorm(64)   # normalize 64 features
+```
