@@ -11,7 +11,7 @@ This is also accompanied by walkthroughs of data loading, preprocessing, scaling
 
 --- 
 
-The bulk of the lessons covered neural networks. An introductory lecture can be found here as `neuralnets.md` and information on what types of layers to use can be found in `pytorch-layers-info.md`. Here are the topics in order:
+The bulk of the lessons covered neural networks. An introductory lecture can be found here as `neuralnets.md` ([LaTeX Version](https://drive.google.com/file/d/18Ya_NEVPZjuCD6SbBy-UuAuav80krOYA/view?usp=sharing)) and information on what types of layers to use can be found in `pytorch-layers-info.md`. Here are the topics in order:
 
 1. Standard Neural Networks + Easy Improvements
     * `nn-intro-STUDENT` is structured as a worksheet to practice data preprocessing, with the complete code in `nn=intro-SOLUTION`
